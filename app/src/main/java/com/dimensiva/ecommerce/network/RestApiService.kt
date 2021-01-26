@@ -1,19 +1,19 @@
 package com.dimensiva.ecommerce.network
 
 import com.dimensiva.ecommerce.interfaces.RetrofitCallback
-import com.dimensiva.ecommerce.models.ItemResponse
+import com.dimensiva.ecommerce.models.ItemsResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RestApiService {
 
-    fun searchProduct(productToSeach: String, retrofitCallback: RetrofitCallback) {
+    fun searchProduct(productToSearch: String, retrofitCallback: RetrofitCallback) {
 
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
 
-        retrofit.searchProduct(productToSeach).enqueue(object : Callback<ItemResponse> {
-            override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
+        retrofit.searchProduct(productToSearch).enqueue(object : Callback<ItemsResponse> {
+            override fun onResponse(call: Call<ItemsResponse>, response: Response<ItemsResponse>) {
                 if (response.body() != null) {
                     retrofitCallback.onProductSearch(response.body()!!)
                 } else {
@@ -21,7 +21,7 @@ class RestApiService {
                 }
             }
 
-            override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ItemsResponse>, t: Throwable) {
                 retrofitCallback.onError(t.message!!)
             }
 

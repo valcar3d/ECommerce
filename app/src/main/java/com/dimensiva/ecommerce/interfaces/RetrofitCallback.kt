@@ -1,8 +1,8 @@
 package com.dimensiva.ecommerce.interfaces
 
-import com.dimensiva.ecommerce.models.ItemResponse
+import com.dimensiva.ecommerce.models.ItemsResponse
 
 interface RetrofitCallback {
-    fun onProductSearch(product: ItemResponse)
+    fun onProductSearch(product: ItemsResponse)
     fun onError(error: String)
 }

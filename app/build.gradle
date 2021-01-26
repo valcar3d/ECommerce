@@ -7,6 +7,9 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-kapt'
+
     buildFeatures {
         dataBinding true
     }
@@ -63,8 +66,15 @@ dependencies {
 
     //Glide
     implementation "com.github.bumptech.glide:glide:4.11.0"
+
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.github.bumptech.glide:annotations:4.11.0'
+
 
     //MaterialSearchBar
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
+
+    //Viewmodel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 }
