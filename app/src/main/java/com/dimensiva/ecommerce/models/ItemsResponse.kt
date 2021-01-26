@@ -11,10 +11,10 @@ data class ItemsResponse(
 	val page: Int? = null,
 
 	@field:SerializedName("items")
-	val items: List<ItemsItem?>? = null
+	val items: List<Item?>? = null
 )
 
-data class ItemsItem(
+data class Item(
 
 	@field:SerializedName("image")
 	val image: String? = null,

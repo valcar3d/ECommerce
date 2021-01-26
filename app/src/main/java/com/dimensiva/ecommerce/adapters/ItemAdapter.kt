@@ -9,8 +9,6 @@ import com.dimensiva.ecommerce.databinding.ProductItemsBinding
 import com.dimensiva.ecommerce.models.Item
 
 class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemDiffCallback()) {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }

@@ -7,21 +7,21 @@ object DummyData {
         return mutableListOf(
             Item(
                 "https://i5.walmartimages.com/asr/34892510-daac-48d6-b715-7e27988acbc8.d534e57907197211a2787c9372598e25.jpeg?odnHeight=200&odnWidth=200&odnBg=ffffff",
-                13,
+                13.0,
                 1.5,
                 "1",
                 "Something1"
             ),
             Item(
                 "https://i5.walmartimages.com/asr/34892510-daac-48d6-b715-7e27988acbc8.d534e57907197211a2787c9372598e25.jpeg?odnHeight=200&odnWidth=200&odnBg=ffffff",
-                13,
+                15.54,
                 1.5,
                 "1",
                 "Something2"
             ),
             Item(
                 "https://i5.walmartimages.com/asr/34892510-daac-48d6-b715-7e27988acbc8.d534e57907197211a2787c9372598e25.jpeg?odnHeight=200&odnWidth=200&odnBg=ffffff",
-                13,
+                16.5,
                 1.5,
                 "1",
                 "Something3"
