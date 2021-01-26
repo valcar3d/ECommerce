@@ -2,15 +2,15 @@ package com.dimensiva.ecommerce.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.dimensiva.ecommerce.adapters.ItemAdapter
 import com.dimensiva.ecommerce.databinding.ActivityMainBinding
 import com.dimensiva.ecommerce.interfaces.RetrofitCallback
 import com.dimensiva.ecommerce.models.ItemsResponse
-
 import com.dimensiva.ecommerce.repository.ProductsRespository
 import com.dimensiva.ecommerce.utils.DummyData
 import com.dimensiva.ecommerce.viewmodels.ItemsViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 
 class MainActivity : AppCompatActivity(), RetrofitCallback {
 
@@ -28,21 +28,21 @@ class MainActivity : AppCompatActivity(), RetrofitCallback {
         setContentView(view)
 
         val textSearched = binding.searchBar.text
-
-
+        binding.searchBar.setHint("buscar producto")
         productsRespository = ProductsRespository()
         productsRespository.searchProduct(textSearched, this)
 
 
 
-        val adapter = ItemAdapter()
-        binding.rvItems.adapter = adapter
-        adapter.submitList(DummyData.getItems())
     }
 
 
     override fun onProductSearch(product: ItemsResponse) {
         //println("Product ${product.items.toString()}")
+
+        val adapter = ItemAdapter()
+        binding.rvItems.adapter = adapter
+        adapter.submitList(DummyData.getItems())
     }
 
     override fun onError(error: String) {
