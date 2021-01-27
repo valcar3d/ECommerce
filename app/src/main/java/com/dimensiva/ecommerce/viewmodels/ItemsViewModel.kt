@@ -10,9 +10,7 @@ class ItemsViewModel(application: Application) : AndroidViewModel(application) {
     private var repository: ProductsRespository = ProductsRespository()
 
     //Observable livedata to fetch products
-    val productsData: MutableLiveData<List<Item>> by lazy {
-        MutableLiveData<List<Item>>()
-    }
+
 
 
 }

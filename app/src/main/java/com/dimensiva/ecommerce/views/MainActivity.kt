@@ -3,24 +3,25 @@ package com.dimensiva.ecommerce.views
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.dimensiva.ecommerce.adapters.ItemAdapter
 import com.dimensiva.ecommerce.databinding.ActivityMainBinding
 import com.dimensiva.ecommerce.interfaces.RetrofitCallback
 import com.dimensiva.ecommerce.models.Item
 import com.dimensiva.ecommerce.models.ItemsResponse
 import com.dimensiva.ecommerce.repository.ProductsRespository
+import com.dimensiva.ecommerce.utils.SharedPreferencesUtil
 import com.mancj.materialsearchbar.MaterialSearchBar
+
 
 class MainActivity : AppCompatActivity(), RetrofitCallback,
     MaterialSearchBar.OnSearchActionListener {
 
+
+    private lateinit var lastSearches: MutableList<String>
     private lateinit var binding: ActivityMainBinding
     private lateinit var productsRespository: ProductsRespository
 
     private val itemLiveData = MutableLiveData<List<Item>>()
-
-    //private lateinit var itemViewModel: ItemsViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +31,17 @@ class MainActivity : AppCompatActivity(), RetrofitCallback,
         val view = binding.root
         setContentView(view)
 
+        lastSearches = ArrayList()
+
         //Enable searchbar callbacks
         binding.searchBar.setOnSearchActionListener(this)
+
+        //Get last session of searched products
+        val sharedPrefSaved = SharedPreferencesUtil.getArrayPrefs("latestSearches", this)
+
+        //get all queries from the last session
+        binding.searchBar.lastSuggestions = sharedPrefSaved
+
 
         binding.searchBar.setHint("buscar producto")
         productsRespository = ProductsRespository()
@@ -41,7 +51,7 @@ class MainActivity : AppCompatActivity(), RetrofitCallback,
 
 
     override fun onProductSearch(product: ItemsResponse) {
-        println("Product ${product.items}")
+        //println("Product ${product.items}")
 
         val adapter = ItemAdapter()
         binding.rvItems.adapter = adapter
@@ -66,13 +76,18 @@ class MainActivity : AppCompatActivity(), RetrofitCallback,
     }
 
     override fun onSearchConfirmed(text: CharSequence?) {
-        println("Text search = $text")
+        //println("Text searched = $text")
         productsRespository.searchProduct(text.toString(), this)
+
+        //Get and save list of searches
+        lastSearches = binding.searchBar.lastSuggestions as MutableList<String>
+        SharedPreferencesUtil.setArrayPrefs("latestSearches", lastSearches, this)
+
+
     }
 
     override fun onButtonClicked(buttonCode: Int) {
         println("onButtonClicked")
     }
-
 
 }
