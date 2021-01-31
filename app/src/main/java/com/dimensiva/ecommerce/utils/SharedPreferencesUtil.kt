@@ -10,6 +10,7 @@ import java.lang.reflect.Type
 
 object SharedPreferencesUtil {
     fun setArrayPrefs(nameToSave: String, array: MutableList<String>, mContext: Context) {
+
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext)
         val editor: SharedPreferences.Editor = sharedPrefs.edit()
         val gson = Gson()
@@ -24,11 +25,15 @@ object SharedPreferencesUtil {
 
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext)
         val gson = Gson()
-        val json = sharedPrefs.getString(nameToGet, "")
-        val type: Type = object : TypeToken<List<String?>?>() {}.type
 
-        return gson.fromJson(json, type)
+        return if (sharedPrefs.getString(nameToGet, "").equals("")) {
+            arrayListOf("")
+        } else {
 
+            val json = sharedPrefs.getString(nameToGet, "")
+            val type: Type = object : TypeToken<List<String?>?>() {}.type
 
+            gson.fromJson(json, type)
+        }
     }
 }
