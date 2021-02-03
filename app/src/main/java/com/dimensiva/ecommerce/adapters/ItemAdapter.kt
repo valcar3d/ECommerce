@@ -38,6 +38,7 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemDiffCallback()
 }
 
 open class ItemDiffCallback() : DiffUtil.ItemCallback<Item>() {
+
     override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
         return oldItem.id == newItem.id
     }
